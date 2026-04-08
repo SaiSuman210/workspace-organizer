@@ -85,7 +85,7 @@ def log_end(success: bool, steps: int, score: float, rewards: List[float]) -> No
 def run_episode(task_name: str) -> None:
     api_base_url = os.environ.get("API_BASE_URL", "https://router.huggingface.co/v1")
     api_key = os.environ.get("HF_TOKEN")
-    model_name = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.1-8B-Instruct")
+    model_name = os.environ.get("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
 
     env = WorkspaceEnv()
     obs = env.reset(task_name)

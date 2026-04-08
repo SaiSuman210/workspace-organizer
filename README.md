@@ -53,8 +53,8 @@ Per-step rewards (clamped to `[0.0, 1.0]`):
 - Rename matching solution: **+0.3**
 - Move matching solution placement: **+0.4**
 - Delete matching expected duplicate: **+0.5**
-- Invalid / unrecognized action: **−0.2**
-- Delete non-duplicate or unexpected: **−0.5**
+- Invalid / unrecognized action: **-0.2**
+- Delete non-duplicate or unexpected: **-0.5**
 
 Episode score = mean of per-step rewards, normalized to `[0.0, 1.0]`.
 
@@ -76,6 +76,17 @@ python inference.py --task medium
 python inference.py --task hard
 ```
 
+## HTTP API (server)
+
+The server exposes the environment over HTTP on port 7860:
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `/reset` | POST | Reset env, returns `Observation`. Body: `{"task": "easy"}` |
+| `/step` | POST | Apply action, returns `StepResult`. Body: `{"action": {...}}` |
+| `/state` | GET | Get current observation |
+| `/health` | GET | Health check |
+
 ## Run tests
 
 ```bash
@@ -85,8 +96,15 @@ python -m pytest tests/ -v
 ## Docker
 
 ```bash
+# Build
 docker build -t workspace-organizer .
-docker run -e HF_TOKEN=hf_... -e MODEL_NAME=Qwen/Qwen2.5-72B-Instruct workspace-organizer --task easy
+
+# Run server (default)
+docker run -p 7860:7860 workspace-organizer
+
+# Run inference
+docker run -e HF_TOKEN=hf_... -e MODEL_NAME=meta-llama/Llama-3.1-8B-Instruct \
+  --entrypoint python workspace-organizer inference.py --task easy
 ```
 
 ## Baseline scores

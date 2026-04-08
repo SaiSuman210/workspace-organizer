@@ -84,8 +84,8 @@ def log_end(success: bool, steps: int, score: float, rewards: List[float]) -> No
 
 def run_episode(task_name: str) -> None:
     api_base_url = os.environ.get("API_BASE_URL", "https://router.huggingface.co/v1")
-    api_key = os.environ.get("HF_TOKEN", "hf_placeholder")
-    model_name = os.environ.get("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
+    api_key = os.environ.get("HF_TOKEN")
+    model_name = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.1-8B-Instruct")
 
     env = WorkspaceEnv()
     obs = env.reset(task_name)
@@ -96,23 +96,26 @@ def run_episode(task_name: str) -> None:
 
     rewards: List[float] = []
     steps_taken = 0
+    # Keep message history so the model doesn't repeat actions
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     for step in range(1, MAX_STEPS + 1):
         prompt = format_prompt(obs)
+        messages.append({"role": "user", "content": prompt})
         parse_error: Optional[str] = None
 
         try:
             completion = client.chat.completions.create(
                 model=model_name,
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": prompt},
-                ],
+                messages=messages,
             )
             response_text = (completion.choices[0].message.content or "").strip()
+            # Add assistant reply to history
+            messages.append({"role": "assistant", "content": response_text})
         except Exception as exc:
             response_text = ""
             parse_error = str(exc)
+            messages.append({"role": "assistant", "content": ""})
 
         action, action_error = parse_action(response_text)
         error = parse_error or action_error

@@ -1,0 +1,14 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir fastapi uvicorn openenv-core
+
+COPY . .
+
+EXPOSE 7860
+
+# Default: run the HTTP server (needed for HF Space validation)
+ENTRYPOINT ["python", "-m", "server.app"]

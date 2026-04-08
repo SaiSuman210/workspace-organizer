@@ -1,0 +1,10 @@
+name: workspace-organizer
+version: "1.0.0"
+description: "An OpenEnv-style AI agent benchmark that simulates organizing a messy Downloads folder. The agent performs file operations (rename, move, create_folder, delete) to complete tasks of increasing difficulty."
+tasks:
+  - easy
+  - medium
+  - hard
+reward_range:
+  min: 0.0
+  max: 1.0

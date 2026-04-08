@@ -1,0 +1,4 @@
+# file: /Users/saisuman/Documents/meta-pytorch-hackathon/inference.py
+# hypothesis_version: 6.141.1
+
+[0.0, ',', '--task', 'API_BASE_URL', 'HF_TOKEN', 'MODEL_NAME', '__main__', 'content', 'easy', 'hard', 'hf_placeholder', 'medium', 'model_dump', 'null', 'parse_error', 'role', 'system', 'user', 'workspace-organizer']

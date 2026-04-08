@@ -9,5 +9,6 @@ COPY . .
 
 EXPOSE 7860
 
-# Default: run the HTTP server (needed for HF Space validation)
-ENTRYPOINT ["python", "-m", "server.app"]
+# Start both the HTTP server (background) and keep container alive.
+# The evaluator will exec `python inference.py` separately inside the container.
+CMD ["python", "-m", "server.app"]

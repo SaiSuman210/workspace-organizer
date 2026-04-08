@@ -1,4 +1,0 @@
-# file: /Users/saisuman/Documents/meta-pytorch-hackathon/env/env.py
-# hypothesis_version: 6.141.1
-
-[-0.2, 0.0, 1.0, 'create_folder', 'delete', 'move', 'name', 'rename']

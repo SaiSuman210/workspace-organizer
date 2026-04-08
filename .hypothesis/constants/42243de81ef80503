@@ -1,4 +1,0 @@
-# file: /Users/saisuman/Documents/meta-pytorch-hackathon/inference.py
-# hypothesis_version: 6.141.1
-
-['--task', 'END', 'HF_API_KEY', 'HF_ROUTER_URL', 'MODEL_NAME', 'START', 'STEP', '__main__', 'action', 'content', 'done', 'easy', 'episode_score', 'event', 'hf_placeholder', 'model_dump', 'observation', 'parse_error', 'reward', 'role', 'step', 'system', 'task', 'user']

@@ -1,4 +1,0 @@
-# file: /Users/saisuman/Documents/meta-pytorch-hackathon/env/__init__.py
-# hypothesis_version: 6.141.1
-
-['Action', 'File', 'Observation', 'Reward', 'StepResult', 'TaskSolution', 'WorkspaceEnv']

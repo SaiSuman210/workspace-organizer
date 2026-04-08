@@ -1,3 +1,12 @@
+---
+title: Workspace Organizer
+emoji: 🗂️
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
+
 # Workspace Organizer — OpenEnv Benchmark
 
 An OpenEnv-style AI agent benchmark that simulates organizing a messy "Downloads" folder.

@@ -87,10 +87,10 @@ class WorkspaceEnv:
         self._files[action.file_id] = self._files[action.file_id].model_copy(
             update={"name": action.target}
         )
-        # Check if rename matches solution
+        # Full reward if matches solution, partial credit for any valid rename
         if action.target == self._solution.expected_renames.get(action.file_id):
             return 0.3
-        return 0.0
+        return 0.1  # partial credit for attempting a rename
 
     def _handle_create_folder(self, action: Action) -> float:
         """Create a new folder. Returns raw reward delta."""
@@ -122,10 +122,10 @@ class WorkspaceEnv:
         if current_folder is not None:
             self._folders[current_folder].remove(action.file_id)
         self._folders[action.target].append(action.file_id)
-        # Check if move matches solution placement
+        # Full reward if matches solution, partial credit for any valid move
         if action.target == self._solution.expected_placements.get(action.file_id):
             return 0.4
-        return 0.0
+        return 0.1  # partial credit for attempting a move
 
     def _handle_delete(self, action: Action) -> float:
         """Delete a file. Returns raw reward delta."""

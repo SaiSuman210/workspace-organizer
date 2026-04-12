@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 from env.env import WorkspaceEnv
 from env.models import Action, Observation, StepResult
+from env.tasks import TASKS
 
 app = FastAPI(title="Workspace Organizer", version="1.0.0")
 
@@ -47,6 +48,12 @@ def state():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/tasks")
+def list_tasks():
+    """List all available tasks."""
+    return {"tasks": list(TASKS.keys())}
 
 
 def main():

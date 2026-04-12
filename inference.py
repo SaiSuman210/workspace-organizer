@@ -126,6 +126,10 @@ def run_episode(task_name: str) -> None:
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--task", default="easy", choices=["easy", "medium", "hard"])
+    parser.add_argument("--task", default="all", choices=["easy", "medium", "hard", "all"])
     args = parser.parse_args()
-    run_episode(args.task)
+    if args.task == "all":
+        for task in ["easy", "medium", "hard"]:
+            run_episode(task)
+    else:
+        run_episode(args.task)
